@@ -28,23 +28,23 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "Mandelbrot.h"
-#include <cstring>
 
-Mandelbrot::Mandelbrot(double cx, double cy, double zoom, uint32_t pwidth, uint32_t pheight) {
-	width=pwidth;
-	height=pheight;
-	p=new iterations_t[width*height+1]();
-	xs=cx-0.5/zoom;
-	ys=cy+0.5*height/(zoom*width);
-	inc=1.0/(zoom*width);
-}
+int main() {
+	Mandelbrot m1(TESTA_CX,TESTA_CY,TEST_ZOOM,WIDTH,HEIGHT);
+	m1.fastest(ITERATIONS);
+	m1.save_to_png("test_black_detail.png",ITERATIONS);
+	Mandelbrot m2(TESTB_CX,TESTB_CY,TEST_ZOOM,WIDTH,HEIGHT);
+	m2.fastest(ITERATIONS);
+	m2.save_to_png("test_noblack_detail.png",ITERATIONS);
+	Mandelbrot m3(TESTC_CX,TESTC_CY,TEST_ZOOM,WIDTH,HEIGHT);
+	m3.fastest(ITERATIONS);
+	m3.save_to_png("test_noblack_nodetail.png",ITERATIONS);
+	Mandelbrot m4(TESTD_CX,TESTD_CY,TEST_ZOOM,WIDTH,HEIGHT);
+	m4.fastest(ITERATIONS);
+	m4.save_to_png("blacka.png",ITERATIONS);
+	Mandelbrot m5(0,0,0.25,WIDTH,HEIGHT);
+	m5.fastest(ITERATIONS);
+	m5.save_to_png("mandelbrot.png",ITERATIONS);
+	return 0;
 
-void Mandelbrot::reset(iterations_t* pp, uint32_t stride, uint32_t render_width, uint32_t render_height) {
-	for(uint32_t i=0;i<render_height;i++) {
-		memset(pp+i*stride,0,render_width*sizeof(iterations_t));
-	}
-}
-
-Mandelbrot::~Mandelbrot() {
-	delete[] p;
 }

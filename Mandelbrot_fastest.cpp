@@ -27,24 +27,11 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include "Mandelbrot_render.h"
 #include "Mandelbrot.h"
-#include <cstring>
+#include "MandelbrotStateEngineSimple.h"
 
-Mandelbrot::Mandelbrot(double cx, double cy, double zoom, uint32_t pwidth, uint32_t pheight) {
-	width=pwidth;
-	height=pheight;
-	p=new iterations_t[width*height+1]();
-	xs=cx-0.5/zoom;
-	ys=cy+0.5*height/(zoom*width);
-	inc=1.0/(zoom*width);
+void Mandelbrot::fastest(iterations_t iterations, uint32_t render_x, uint32_t render_y, uint32_t render_width, uint32_t render_height) {
+	render_avx_sheeprace2<MandelbrotStateEngineSimple>(iterations,render_x,render_y,render_width,render_height);
 }
 
-void Mandelbrot::reset(iterations_t* pp, uint32_t stride, uint32_t render_width, uint32_t render_height) {
-	for(uint32_t i=0;i<render_height;i++) {
-		memset(pp+i*stride,0,render_width*sizeof(iterations_t));
-	}
-}
-
-Mandelbrot::~Mandelbrot() {
-	delete[] p;
-}

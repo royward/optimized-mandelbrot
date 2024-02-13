@@ -1,3 +1,24 @@
+// hsv2rgb based on: https://stackoverflow.com/questions/3018313/algorithm-to-convert-rgb-to-hsv-and-hsv-to-rgb-in-range-0-255-for-both
+
+// save_to_png based on: https://gist.github.com/niw/5963798
+/*
+ * A simple libpng example program
+ * http://zarb.org/~gc/html/libpng.html
+ *
+ * Modified by Yoshimasa Niwa to make it much simpler
+ * and support all defined color_type.
+ *
+ * To build, use the next instruction on OS X.
+ * $ brew install libpng
+ * $ clang -lz -lpng16 libpng_test.c
+ *
+ * Copyright 2002-2010 Guillaume Cottenceau.
+ *
+ * This software may be freely redistributed under the terms
+ * of the X11 license.
+ *
+ */
+
 #include <png.h>
 #include <cstdio>
 #include <cstdlib>
