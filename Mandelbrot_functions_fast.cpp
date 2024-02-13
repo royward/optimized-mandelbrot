@@ -8,7 +8,7 @@
 uint32_t mandelbrot_point_fast_math(double cx, double cy, uint32_t m) {
 	uint32_t count=0;
 	double x=0,y=0;
-	while(count<m && x*x+y*y<4.0) {
+	while(count<m && x*x+y*y<=4.0) {
 		double nx=x*x-y*y+cx;
 		y=2*x*y+cy;
 		x=nx;
@@ -20,7 +20,7 @@ uint32_t mandelbrot_point_fast_math(double cx, double cy, uint32_t m) {
 uint32_t mandelbrot_point_fast_math_decrement(double cx, double cy, uint32_t m) {
 	uint32_t count=m;
 	double x=0,y=0;
-	while(count!=0 && x*x+y*y<4.0) {
+	while(count!=0 && x*x+y*y<=4.0) {
 		double nx=x*x-y*y+cx;
 		y=2*x*y+cy;
 		x=nx;
@@ -32,7 +32,7 @@ uint32_t mandelbrot_point_fast_math_decrement(double cx, double cy, uint32_t m) 
 iterations_t mandelbrot_sheeprace(double cx, double cy, iterations_t m) {
 	double x = 0, y = 0, x_squared = 0, y_squared = 0, mag_squared = 0;
 	iterations_t count = m + 2;
-	while(count != 0 && mag_squared < 4.0) {
+	while(count != 0 && mag_squared <= 4.0) {
 		mag_squared = x_squared + y_squared;
 		y_squared = y * y;
 		x_squared = x * x;
@@ -49,13 +49,13 @@ void mandelbrot2_sheeprace(double s1_cx, double s1_cy, double s2_cx, double s2_c
 	double s2_x = 0, s2_y = 0, s2_x_squared = 0, s2_y_squared = 0, s2_mag_squared = 0;
 	iterations_t count = m + 2;
 	while(count != 0) {
-		if(s2_mag_squared >= 4.0) {
+		if(s2_mag_squared > 4.0) {
 			// write out stream 1
 			*s2_r = m - count;
 			// now only stream 0 left
 			goto single_point;
 		}
-		if(s1_mag_squared >= 4.0) {
+		if(s1_mag_squared > 4.0) {
 			// write out stream 0
 			*s1_r = m - count;
 			// transfer stream 1 to stream 0
@@ -86,7 +86,7 @@ void mandelbrot2_sheeprace(double s1_cx, double s1_cy, double s2_cx, double s2_c
 	*s2_r = m;
 	return;
 single_point:
-	while(count != 0 && s1_mag_squared < 4.0) {
+	while(count != 0 && s1_mag_squared <= 4.0) {
 		s1_mag_squared = s1_x_squared + s1_y_squared;
 		count--;
 		s1_y_squared = s1_y * s1_y;
@@ -103,13 +103,13 @@ void mandelbrot3_sheeprace(double s1_cx, double s1_cy, double s2_cx, double s2_c
 	double s3_x = 0, s3_y = 0, s3_x_squared = 0, s3_y_squared = 0, s3_mag_squared = 0;
 	iterations_t count = m + 2;
 	while(count != 0) {
-		if(s3_mag_squared >= 4.0) {
+		if(s3_mag_squared > 4.0) {
 			// write out stream 1
 			*s3_r = m - count;
 			// now only stream 0 left
 			goto two_points;
 		}
-		if(s1_mag_squared >= 4.0) {
+		if(s1_mag_squared > 4.0) {
 			// write out stream 0
 			*s1_r = m - count;
 			// transfer stream 1 to stream 0
@@ -124,7 +124,7 @@ void mandelbrot3_sheeprace(double s1_cx, double s1_cy, double s2_cx, double s2_c
 			// now only stream 0 left
 			goto two_points;
 		}
-		if(s2_mag_squared >= 4.0) {
+		if(s2_mag_squared > 4.0) {
 			// write out stream 0
 			*s2_r = m - count;
 			// transfer stream 1 to stream 0
@@ -162,13 +162,13 @@ void mandelbrot3_sheeprace(double s1_cx, double s1_cy, double s2_cx, double s2_c
 	return;
 two_points:
 	while(count != 0) {
-		if(s2_mag_squared >= 4.0) {
+		if(s2_mag_squared > 4.0) {
 			// write out stream 1
 			*s2_r = m - count;
 			// now only stream 0 left
 			goto single_point;
 		}
-		if(s1_mag_squared >= 4.0) {
+		if(s1_mag_squared > 4.0) {
 			// write out stream 0
 			*s1_r = m - count;
 			// transfer stream 1 to stream 0
@@ -199,7 +199,7 @@ two_points:
 	*s2_r = m;
 	return;
 single_point:
-	while(count != 0 && s1_mag_squared < 4.0) {
+	while(count != 0 && s1_mag_squared <= 4.0) {
 		s1_mag_squared = s1_x_squared + s1_y_squared;
 		count--;
 		s1_y_squared = s1_y * s1_y;
@@ -217,13 +217,13 @@ void mandelbrot4_sheeprace(double s1_cx, double s1_cy, double s2_cx, double s2_c
 	double s4_x = 0, s4_y = 0, s4_x_squared = 0, s4_y_squared = 0, s4_mag_squared = 0;
 	iterations_t count = m + 2;
 	while(count != 0) {
-		if(s4_mag_squared >= 4.0) {
+		if(s4_mag_squared > 4.0) {
 			// write out stream 1
 			*s4_r = m - count;
 			// now only stream 0 left
 			goto three_points;
 		}
-		if(s1_mag_squared >= 4.0) {
+		if(s1_mag_squared > 4.0) {
 			// write out stream 0
 			*s1_r = m - count;
 			// transfer stream 1 to stream 0
@@ -238,7 +238,7 @@ void mandelbrot4_sheeprace(double s1_cx, double s1_cy, double s2_cx, double s2_c
 			// now only stream 0 left
 			goto three_points;
 		}
-		if(s2_mag_squared >= 4.0) {
+		if(s2_mag_squared > 4.0) {
 			// write out stream 0
 			*s2_r = m - count;
 			// transfer stream 1 to stream 0
@@ -253,7 +253,7 @@ void mandelbrot4_sheeprace(double s1_cx, double s1_cy, double s2_cx, double s2_c
 			// now only stream 0 left
 			goto three_points;
 		}
-		if(s3_mag_squared >= 4.0) {
+		if(s3_mag_squared > 4.0) {
 			// write out stream 0
 			*s3_r = m - count;
 			// transfer stream 1 to stream 0
@@ -297,13 +297,13 @@ void mandelbrot4_sheeprace(double s1_cx, double s1_cy, double s2_cx, double s2_c
 	return;
 three_points:
 	while(count != 0) {
-		if(s3_mag_squared >= 4.0) {
+		if(s3_mag_squared > 4.0) {
 			// write out stream 1
 			*s3_r = m - count;
 			// now only stream 0 left
 			goto two_points;
 		}
-		if(s1_mag_squared >= 4.0) {
+		if(s1_mag_squared > 4.0) {
 			// write out stream 0
 			*s1_r = m - count;
 			// transfer stream 1 to stream 0
@@ -318,7 +318,7 @@ three_points:
 			// now only stream 0 left
 			goto two_points;
 		}
-		if(s2_mag_squared >= 4.0) {
+		if(s2_mag_squared > 4.0) {
 			// write out stream 0
 			*s2_r = m - count;
 			// transfer stream 1 to stream 0
@@ -356,13 +356,13 @@ three_points:
 	return;
 two_points:
 	while(count != 0) {
-		if(s2_mag_squared >= 4.0) {
+		if(s2_mag_squared > 4.0) {
 			// write out stream 1
 			*s2_r = m - count;
 			// now only stream 0 left
 			goto single_point;
 		}
-		if(s1_mag_squared >= 4.0) {
+		if(s1_mag_squared > 4.0) {
 			// write out stream 0
 			*s1_r = m - count;
 			// transfer stream 1 to stream 0
@@ -393,7 +393,7 @@ two_points:
 	*s2_r = m;
 	return;
 single_point:
-	while(count != 0 && s1_mag_squared < 4.0) {
+	while(count != 0 && s1_mag_squared <= 4.0) {
 		s1_mag_squared = s1_x_squared + s1_y_squared;
 		count--;
 		s1_y_squared = s1_y * s1_y;

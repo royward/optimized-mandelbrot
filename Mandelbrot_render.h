@@ -19,7 +19,7 @@ template<class M> void Mandelbrot::render1(iterations_t iterations, uint32_t ren
 	double s1_cx = 0, s1_cy = 0;
 	mse.get_next_point(s1_cx, s1_cy, s1_dx, s1_dy);
 	while(true) {
-		if(s1_count == 0 || s1_mag >= 4) {
+		if(s1_count == 0 || s1_mag > 4.0) {
 			pp[s1_dx + s1_dy * width] = iterations - s1_count;
 			if(!mse.get_next_point(s1_cx, s1_cy, s1_dx, s1_dy)) {
 				cleanup(mse);
@@ -59,7 +59,7 @@ template<class M> void Mandelbrot::render2(iterations_t iterations, uint32_t ren
 	mse.get_next_point(s1_cx, s1_cy, s1_dx, s1_dy);
 	mse.get_next_point(s2_cx, s2_cy, s2_dx, s2_dy);
 	while(true) {
-		if(s1_count == 0 || s1_mag >= 4) {
+		if(s1_count == 0 || s1_mag > 4.0) {
 			pp[s1_dx + s1_dy * width] = iterations - s1_count;
 			if(!mse.get_next_point(s1_cx, s1_cy, s1_dx, s1_dy)) {
 				cleanup(mse);
@@ -68,7 +68,7 @@ template<class M> void Mandelbrot::render2(iterations_t iterations, uint32_t ren
 			s1_x = s1_y = s1_x_squared = s1_y_squared = s1_mag = 0;
 			s1_count = iterations;
 		}
-		if(s2_count == 0 || s2_mag >= 4) {
+		if(s2_count == 0 || s2_mag > 4.0) {
 			pp[s2_dx + s2_dy * width] = iterations - s2_count;
 			if(!mse.get_next_point(s2_cx, s2_cy, s2_dx, s2_dy)) {
 				cleanup(mse);
@@ -109,7 +109,7 @@ template<class M> void Mandelbrot::render_sheeprace1(iterations_t iterations, ui
 	double s1_cx = 0, s1_cy = 0;
 	mse.get_next_point(s1_cx, s1_cy, s1_dx, s1_dy);
 	while(true) {
-		if(s1_count == 0 || s1_mag >= 4) {
+		if(s1_count == 0 || s1_mag > 4.0) {
 			pp[s1_dx + s1_dy * width] = iterations - s1_count;
 			if(!mse.get_next_point(s1_cx, s1_cy, s1_dx, s1_dy)) {
 				cleanup(mse);
@@ -149,7 +149,7 @@ template<class M> void Mandelbrot::render_sheeprace2(iterations_t iterations, ui
 	mse.get_next_point(s1_cx, s1_cy, s1_dx, s1_dy);
 	mse.get_next_point(s2_cx, s2_cy, s2_dx, s2_dy);
 	while(true) {
-		if(s1_count == 0 || s1_mag >= 4) {
+		if(s1_count == 0 || s1_mag > 4.0) {
 			pp[s1_dx + s1_dy * width] = iterations - s1_count;
 			if(!mse.get_next_point(s1_cx, s1_cy, s1_dx, s1_dy)) {
 				cleanup(mse);
@@ -158,7 +158,7 @@ template<class M> void Mandelbrot::render_sheeprace2(iterations_t iterations, ui
 			s1_x = s1_y = s1_x_squared = s1_y_squared = s1_mag = 0;
 			s1_count = iterations + 2;
 		}
-		if(s2_count == 0 || s2_mag >= 4) {
+		if(s2_count == 0 || s2_mag > 4.0) {
 			pp[s2_dx + s2_dy * width] = iterations - s2_count;
 			if(!mse.get_next_point(s2_cx, s2_cy, s2_dx, s2_dy)) {
 				cleanup(mse);
@@ -209,7 +209,7 @@ template<class M> void Mandelbrot::render3(iterations_t iterations, uint32_t ren
 	mse.get_next_point(s2_cx, s2_cy, s2_dx, s2_dy);
 	mse.get_next_point(s3_cx, s3_cy, s3_dx, s3_dy);
 	while(true) {
-		if(s1_count == 0 || s1_mag >= 4) {
+		if(s1_count == 0 || s1_mag > 4.0) {
 			pp[s1_dx + s1_dy * width] = iterations - s1_count;
 			if(!mse.get_next_point(s1_cx, s1_cy, s1_dx, s1_dy)) {
 				cleanup(mse);
@@ -218,7 +218,7 @@ template<class M> void Mandelbrot::render3(iterations_t iterations, uint32_t ren
 			s1_x = s1_y = s1_x_squared = s1_y_squared = s1_mag = 0;
 			s1_count = iterations;
 		}
-		if(s2_count == 0 || s2_mag >= 4) {
+		if(s2_count == 0 || s2_mag > 4.0) {
 			pp[s2_dx + s2_dy * width] = iterations - s2_count;
 			if(!mse.get_next_point(s2_cx, s2_cy, s2_dx, s2_dy)) {
 				cleanup(mse);
@@ -227,7 +227,7 @@ template<class M> void Mandelbrot::render3(iterations_t iterations, uint32_t ren
 			s2_x = s2_y = s2_x_squared = s2_y_squared = s2_mag = 0;
 			s2_count = iterations;
 		}
-		if(s3_count == 0 || s3_mag >= 4) {
+		if(s3_count == 0 || s3_mag > 4.0) {
 			pp[s3_dx + s3_dy * width] = iterations - s3_count;
 			if(!mse.get_next_point(s3_cx, s3_cy, s3_dx, s3_dy)) {
 				cleanup(mse);
@@ -284,7 +284,7 @@ template<class M> void Mandelbrot::render_sheeprace3(iterations_t iterations, ui
 	mse.get_next_point(s2_cx, s2_cy, s2_dx, s2_dy);
 	mse.get_next_point(s3_cx, s3_cy, s3_dx, s3_dy);
 	while(true) {
-		if(s1_count == 0 || s1_mag >= 4) {
+		if(s1_count == 0 || s1_mag > 4.0) {
 			pp[s1_dx + s1_dy * width] = iterations - s1_count;
 			if(!mse.get_next_point(s1_cx, s1_cy, s1_dx, s1_dy)) {
 				cleanup(mse);
@@ -293,7 +293,7 @@ template<class M> void Mandelbrot::render_sheeprace3(iterations_t iterations, ui
 			s1_x = s1_y = s1_x_squared = s1_y_squared = s1_mag = 0;
 			s1_count = iterations + 2;
 		}
-		if(s2_count == 0 || s2_mag >= 4) {
+		if(s2_count == 0 || s2_mag > 4.0) {
 			pp[s2_dx + s2_dy * width] = iterations - s2_count;
 			if(!mse.get_next_point(s2_cx, s2_cy, s2_dx, s2_dy)) {
 				cleanup(mse);
@@ -302,7 +302,7 @@ template<class M> void Mandelbrot::render_sheeprace3(iterations_t iterations, ui
 			s2_x = s2_y = s2_x_squared = s2_y_squared = s2_mag = 0;
 			s2_count = iterations + 2;
 		}
-		if(s3_count == 0 || s3_mag >= 4) {
+		if(s3_count == 0 || s3_mag > 4.0) {
 			pp[s3_dx + s3_dy * width] = iterations - s3_count;
 			if(!mse.get_next_point(s3_cx, s3_cy, s3_dx, s3_dy)) {
 				cleanup(mse);
@@ -364,7 +364,7 @@ template<class M> void Mandelbrot::render4(iterations_t iterations, uint32_t ren
 	mse.get_next_point(s3_cx, s3_cy, s3_dx, s3_dy);
 	mse.get_next_point(s4_cx, s4_cy, s4_dx, s4_dy);
 	while(true) {
-		if(s1_count == 0 || s1_mag >= 4) {
+		if(s1_count == 0 || s1_mag > 4.0) {
 			pp[s1_dx + s1_dy * width] = iterations - s1_count;
 			if(!mse.get_next_point(s1_cx, s1_cy, s1_dx, s1_dy)) {
 				cleanup(mse);
@@ -373,7 +373,7 @@ template<class M> void Mandelbrot::render4(iterations_t iterations, uint32_t ren
 			s1_x = s1_y = s1_x_squared = s1_y_squared = s1_mag = 0;
 			s1_count = iterations;
 		}
-		if(s2_count == 0 || s2_mag >= 4) {
+		if(s2_count == 0 || s2_mag > 4.0) {
 			pp[s2_dx + s2_dy * width] = iterations - s2_count;
 			if(!mse.get_next_point(s2_cx, s2_cy, s2_dx, s2_dy)) {
 				cleanup(mse);
@@ -382,7 +382,7 @@ template<class M> void Mandelbrot::render4(iterations_t iterations, uint32_t ren
 			s2_x = s2_y = s2_x_squared = s2_y_squared = s2_mag = 0;
 			s2_count = iterations;
 		}
-		if(s3_count == 0 || s3_mag >= 4) {
+		if(s3_count == 0 || s3_mag > 4.0) {
 			pp[s3_dx + s3_dy * width] = iterations - s3_count;
 			if(!mse.get_next_point(s3_cx, s3_cy, s3_dx, s3_dy)) {
 				cleanup(mse);
@@ -391,7 +391,7 @@ template<class M> void Mandelbrot::render4(iterations_t iterations, uint32_t ren
 			s3_x = s3_y = s3_x_squared = s3_y_squared = s3_mag = 0;
 			s3_count = iterations;
 		}
-		if(s4_count == 0 || s4_mag >= 4) {
+		if(s4_count == 0 || s4_mag > 4.0) {
 			pp[s4_dx + s4_dy * width] = iterations - s4_count;
 			if(!mse.get_next_point(s4_cx, s4_cy, s4_dx, s4_dy)) {
 				cleanup(mse);
@@ -459,7 +459,7 @@ template<class M> void Mandelbrot::render_sheeprace4(iterations_t iterations, ui
 	mse.get_next_point(s3_cx, s3_cy, s3_dx, s3_dy);
 	mse.get_next_point(s4_cx, s4_cy, s4_dx, s4_dy);
 	while(true) {
-		if(s1_count == 0 || s1_mag >= 4) {
+		if(s1_count == 0 || s1_mag > 4.0) {
 			pp[s1_dx + s1_dy * width] = iterations - s1_count;
 			if(!mse.get_next_point(s1_cx, s1_cy, s1_dx, s1_dy)) {
 				cleanup(mse);
@@ -468,7 +468,7 @@ template<class M> void Mandelbrot::render_sheeprace4(iterations_t iterations, ui
 			s1_x = s1_y = s1_x_squared = s1_y_squared = s1_mag = 0;
 			s1_count = iterations + 2;
 		}
-		if(s2_count == 0 || s2_mag >= 4) {
+		if(s2_count == 0 || s2_mag > 4.0) {
 			pp[s2_dx + s2_dy * width] = iterations - s2_count;
 			if(!mse.get_next_point(s2_cx, s2_cy, s2_dx, s2_dy)) {
 				cleanup(mse);
@@ -477,7 +477,7 @@ template<class M> void Mandelbrot::render_sheeprace4(iterations_t iterations, ui
 			s2_x = s2_y = s2_x_squared = s2_y_squared = s2_mag = 0;
 			s2_count = iterations + 2;
 		}
-		if(s3_count == 0 || s3_mag >= 4) {
+		if(s3_count == 0 || s3_mag > 4.0) {
 			pp[s3_dx + s3_dy * width] = iterations - s3_count;
 			if(!mse.get_next_point(s3_cx, s3_cy, s3_dx, s3_dy)) {
 				cleanup(mse);
@@ -486,7 +486,7 @@ template<class M> void Mandelbrot::render_sheeprace4(iterations_t iterations, ui
 			s3_x = s3_y = s3_x_squared = s3_y_squared = s3_mag = 0;
 			s3_count = iterations + 2;
 		}
-		if(s4_count == 0 || s4_mag >= 4) {
+		if(s4_count == 0 || s4_mag > 4.0) {
 			pp[s4_dx + s4_dy * width] = iterations - s4_count;
 			if(!mse.get_next_point(s4_cx, s4_cy, s4_dx, s4_dy)) {
 				cleanup(mse);
@@ -551,7 +551,7 @@ template<class M> void Mandelbrot::render_avx1(iterations_t iterations, uint32_t
 	__m256d s1_cx = *(__m256d * )cx_mem;
 	__m256d s1_cy = *(__m256d * )cy_mem;
 	while(true) {
-		__m256d cmp2 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GE_OS));
+		__m256d cmp2 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GT_OS));
 		if(!_mm256_testz_pd(cmp2, cmp2)) {
 			uint32_t mask = _mm256_movemask_pd(cmp2);
 			_mm256_store_pd(cx_mem, s1_cx);
@@ -641,7 +641,7 @@ template<class M> void Mandelbrot::render_avx2(iterations_t iterations, uint32_t
 	__m256d s2_cx = *(__m256d * )cx_mem;
 	__m256d s2_cy = *(__m256d * )cy_mem;
 	while(true) {
-		__m256d cmp2 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GE_OS));
+		__m256d cmp2 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GT_OS));
 		if(!_mm256_testz_pd(cmp2, cmp2)) {
 			uint32_t mask = _mm256_movemask_pd(cmp2);
 			_mm256_store_pd(cx_mem, s1_cx);
@@ -675,7 +675,7 @@ template<class M> void Mandelbrot::render_avx2(iterations_t iterations, uint32_t
 			s1_cx = _mm256_load_pd(cx_mem);
 			s1_cy = _mm256_load_pd(cy_mem);
 		}
-		cmp2 = _mm256_or_pd((__m256d)s2_count, _mm256_cmp_pd(s2_mag, four_double, _CMP_GE_OS));
+		cmp2 = _mm256_or_pd((__m256d)s2_count, _mm256_cmp_pd(s2_mag, four_double, _CMP_GT_OS));
 		if(!_mm256_testz_pd(cmp2, cmp2)) {
 			uint32_t mask = _mm256_movemask_pd(cmp2);
 			_mm256_store_pd(cx_mem, s2_cx);
@@ -784,7 +784,7 @@ template<class M> void Mandelbrot::render_avx3(iterations_t iterations, uint32_t
 	__m256d s3_cx = *(__m256d * )cx_mem;
 	__m256d s3_cy = *(__m256d * )cy_mem;
 	while(true) {
-		__m256d cmp2 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GE_OS));
+		__m256d cmp2 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GT_OS));
 		if(!_mm256_testz_pd(cmp2, cmp2)) {
 			uint32_t mask = _mm256_movemask_pd(cmp2);
 			_mm256_store_pd(cx_mem, s1_cx);
@@ -818,7 +818,7 @@ template<class M> void Mandelbrot::render_avx3(iterations_t iterations, uint32_t
 			s1_cx = _mm256_load_pd(cx_mem);
 			s1_cy = _mm256_load_pd(cy_mem);
 		}
-		cmp2 = _mm256_or_pd((__m256d)s2_count, _mm256_cmp_pd(s2_mag, four_double, _CMP_GE_OS));
+		cmp2 = _mm256_or_pd((__m256d)s2_count, _mm256_cmp_pd(s2_mag, four_double, _CMP_GT_OS));
 		if(!_mm256_testz_pd(cmp2, cmp2)) {
 			uint32_t mask = _mm256_movemask_pd(cmp2);
 			_mm256_store_pd(cx_mem, s2_cx);
@@ -852,7 +852,7 @@ template<class M> void Mandelbrot::render_avx3(iterations_t iterations, uint32_t
 			s2_cx = _mm256_load_pd(cx_mem);
 			s2_cy = _mm256_load_pd(cy_mem);
 		}
-		cmp2 = _mm256_or_pd((__m256d)s3_count, _mm256_cmp_pd(s3_mag, four_double, _CMP_GE_OS));
+		cmp2 = _mm256_or_pd((__m256d)s3_count, _mm256_cmp_pd(s3_mag, four_double, _CMP_GT_OS));
 		if(!_mm256_testz_pd(cmp2, cmp2)) {
 			uint32_t mask = _mm256_movemask_pd(cmp2);
 			_mm256_store_pd(cx_mem, s3_cx);
@@ -941,7 +941,7 @@ template<class M> void Mandelbrot::render_avx_sheeprace1(iterations_t iterations
 	__m256d s1_cx = *(__m256d * )cx_mem;
 	__m256d s1_cy = *(__m256d * )cy_mem;
 	while(true) {
-		__m256d cmp2 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GE_OS));
+		__m256d cmp2 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GT_OS));
 		if(!_mm256_testz_pd(cmp2, cmp2)) {
 			uint32_t mask = _mm256_movemask_pd(cmp2);
 			_mm256_store_pd(cx_mem, s1_cx);
@@ -1031,7 +1031,7 @@ template<class M> void Mandelbrot::render_avx_sheeprace2(iterations_t iterations
 	__m256d s2_cx = *(__m256d * )cx_mem;
 	__m256d s2_cy = *(__m256d * )cy_mem;
 	while(true) {
-		__m256d cmp2 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GE_OS));
+		__m256d cmp2 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GT_OS));
 		if(!_mm256_testz_pd(cmp2, cmp2)) {
 			uint32_t mask = _mm256_movemask_pd(cmp2);
 			_mm256_store_pd(cx_mem, s1_cx);
@@ -1065,7 +1065,7 @@ template<class M> void Mandelbrot::render_avx_sheeprace2(iterations_t iterations
 			s1_cx = _mm256_load_pd(cx_mem);
 			s1_cy = _mm256_load_pd(cy_mem);
 		}
-		cmp2 = _mm256_or_pd((__m256d)s2_count, _mm256_cmp_pd(s2_mag, four_double, _CMP_GE_OS));
+		cmp2 = _mm256_or_pd((__m256d)s2_count, _mm256_cmp_pd(s2_mag, four_double, _CMP_GT_OS));
 		if(!_mm256_testz_pd(cmp2, cmp2)) {
 			uint32_t mask = _mm256_movemask_pd(cmp2);
 			_mm256_store_pd(cx_mem, s2_cx);
@@ -1210,7 +1210,7 @@ template<class M> void Mandelbrot::render_avx_sheeprace3(iterations_t iterations
 	__m256d s3_cx = *(__m256d * )cx_mem;
 	__m256d s3_cy = *(__m256d * )cy_mem;
 	while(true) {
-		__m256d cmp2 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GE_OS));
+		__m256d cmp2 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GT_OS));
 		if(!_mm256_testz_pd(cmp2, cmp2)) {
 			uint32_t mask = _mm256_movemask_pd(cmp2);
 			_mm256_store_pd(cx_mem, s1_cx);
@@ -1244,7 +1244,7 @@ template<class M> void Mandelbrot::render_avx_sheeprace3(iterations_t iterations
 			s1_cx = _mm256_load_pd(cx_mem);
 			s1_cy = _mm256_load_pd(cy_mem);
 		}
-		cmp2 = _mm256_or_pd((__m256d)s2_count, _mm256_cmp_pd(s2_mag, four_double, _CMP_GE_OS));
+		cmp2 = _mm256_or_pd((__m256d)s2_count, _mm256_cmp_pd(s2_mag, four_double, _CMP_GT_OS));
 		if(!_mm256_testz_pd(cmp2, cmp2)) {
 			uint32_t mask = _mm256_movemask_pd(cmp2);
 			_mm256_store_pd(cx_mem, s2_cx);
@@ -1278,7 +1278,7 @@ template<class M> void Mandelbrot::render_avx_sheeprace3(iterations_t iterations
 			s2_cx = _mm256_load_pd(cx_mem);
 			s2_cy = _mm256_load_pd(cy_mem);
 		}
-		cmp2 = _mm256_or_pd((__m256d)s3_count, _mm256_cmp_pd(s3_mag, four_double, _CMP_GE_OS));
+		cmp2 = _mm256_or_pd((__m256d)s3_count, _mm256_cmp_pd(s3_mag, four_double, _CMP_GT_OS));
 		if(!_mm256_testz_pd(cmp2, cmp2)) {
 			uint32_t mask = _mm256_movemask_pd(cmp2);
 			_mm256_store_pd(cx_mem, s3_cx);
