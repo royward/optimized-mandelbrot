@@ -1,7 +1,11 @@
 # optimized-mandelbrot
 A set of optimizations of a Mandelbrot Set for x86-64 generator that gives ~8x speed improvement over the basic loop. This is designed to go with https://orange-kiwi.com/optimization-example-mandelbrot-part-1/
 
-This currently only builds under Linux. but would be easy to port to other operating systems. To build, use the command:
+NOTE: this is example code, rather than a full library.
+
+This currently only builds under Linux. but would be easy to port to other operating systems. It also uses C++, but this would be quite portable to other languages.
+
+To build, use the command:
 
 <pre>make</pre>
 
@@ -49,7 +53,7 @@ The main for the speed tests.
 
 Portions of the speed test need to be build with -ffast-math. They have been moved from main_speed_tests.cpp to here.
 
-## List of files used by the speed test that aren't are made obsolete by faster methods
+## List of files used by the speed test that are are made obsolete by faster methods
 
 ### Mandelbrot_point_simple.cpp
 
