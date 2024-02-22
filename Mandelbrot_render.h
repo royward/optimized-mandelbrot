@@ -1091,10 +1091,10 @@ template<class M> void Mandelbrot::render_avx_sheeprace2(iterations_t iterations
 			cy = _mm256_load_pd(cy_mem); \
 		}
 
-		t1 = _mm256_or_pd((__m256d)s1_count, _mm256_cmp_pd(s1_mag, four_double, _CMP_GT_OS));
+		t1 = _mm256_or_pd((__m256d)s1_count, _mm256_cmpgt_epi64(s1_mag, four_double));
 		TEST(s1_x, s1_y, s1_cx, s1_cy, s1_dx, s1_dy, s1_mag, s1_count);
 
-		t1 = _mm256_or_pd((__m256d)s2_count, _mm256_cmp_pd(s2_mag, four_double, _CMP_GT_OS));
+		t1 = _mm256_or_pd((__m256d)s2_count, _mm256_cmpgt_epi64(s2_mag, four_double));
 		TEST(s2_x, s2_y, s2_cx, s2_cy, s2_dx, s2_dy, s2_mag, s2_count);
 
 		s1_count = _mm256_sub_epi64(s1_count, one_int64);
