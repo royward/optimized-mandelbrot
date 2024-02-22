@@ -28,7 +28,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #pragma once
-#include <stdio.h>
+
 #include <immintrin.h>
 #include "Mandelbrot.h"
 
@@ -1047,7 +1047,6 @@ template<class M> void Mandelbrot::render_avx_sheeprace2(iterations_t iterations
 	double   cy_mem[4]    __attribute__((__aligned__(32)));
 	double   x_mem[4]     __attribute__((__aligned__(32)));
 	double   y_mem[4]     __attribute__((__aligned__(32)));
-	double   mag_mem[4]   __attribute__((__aligned__(32)));
 	uint64_t count_mem[4] __attribute__((__aligned__(32)));
 
 	mse.get_next_point(cx_mem[0], cy_mem[0], s1_dx[0], s1_dy[0]);
@@ -1063,7 +1062,7 @@ template<class M> void Mandelbrot::render_avx_sheeprace2(iterations_t iterations
 	__m256d s2_cx = *(__m256d * )cx_mem;
 	__m256d s2_cy = *(__m256d * )cy_mem;
 	while(true) {
-#		define TEST(x,y,cx,cy,dx,dy,mag,count) \
+#		define TEST(x,y,cx,cy,dx,dy,count) \
 		if(!_mm256_testz_pd(t1, t1)) [[unlikely]] { \
 			uint32_t mask = _mm256_movemask_pd(t1); \
 			_mm256_store_pd(cx_mem, cx); \
@@ -1071,7 +1070,6 @@ template<class M> void Mandelbrot::render_avx_sheeprace2(iterations_t iterations
 			_mm256_store_pd(x_mem, x); \
 			_mm256_store_pd(y_mem, y); \
 			_mm256_store_si256((__m256i * )count_mem, count); \
-			_mm256_store_pd(mag_mem, mag); \
 			while(mask != 0) { \
 				uint32_t b = __builtin_ctz(mask); \
 				pp[dx[b] + dy[b] * width] = iterations - count_mem[b]; \
@@ -1080,22 +1078,21 @@ template<class M> void Mandelbrot::render_avx_sheeprace2(iterations_t iterations
 					return; \
 				} \
 				count_mem[b] = iterations + 2; \
-				x_mem[b] = y_mem[b] = mag_mem[b] = 0; \
+				x_mem[b] = y_mem[b] = 0; \
 				mask = mask & ~(1U<<b); \
 			} \
 			x = _mm256_load_pd(x_mem); \
 			y = _mm256_load_pd(y_mem); \
 			count = _mm256_load_si256((__m256i * )count_mem); \
-			mag = _mm256_load_pd(mag_mem); \
 			cx = _mm256_load_pd(cx_mem); \
 			cy = _mm256_load_pd(cy_mem); \
 		}
 
 		t1 = _mm256_or_pd((__m256d)s1_count, _mm256_cmpgt_epi64(s1_mag, four_double));
-		TEST(s1_x, s1_y, s1_cx, s1_cy, s1_dx, s1_dy, s1_mag, s1_count);
+		TEST(s1_x, s1_y, s1_cx, s1_cy, s1_dx, s1_dy, s1_count);
 
 		t1 = _mm256_or_pd((__m256d)s2_count, _mm256_cmpgt_epi64(s2_mag, four_double));
-		TEST(s2_x, s2_y, s2_cx, s2_cy, s2_dx, s2_dy, s2_mag, s2_count);
+		TEST(s2_x, s2_y, s2_cx, s2_cy, s2_dx, s2_dy, s2_count);
 
 		s1_count = _mm256_sub_epi64(s1_count, one_int64);
 		s1_mag   = _mm256_fmadd_pd(s1_x, s1_x, s1_y);
