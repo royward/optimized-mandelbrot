@@ -32,6 +32,6 @@
 #include "MandelbrotStateEngineSimple.h"
 
 void Mandelbrot::fastest(iterations_t iterations, uint32_t render_x, uint32_t render_y, uint32_t render_width, uint32_t render_height) {
-	render_avx_sheeprace2<MandelbrotStateEngineSimple>(iterations,render_x,render_y,render_width,render_height);
+	render_avx_sheeprace3<MandelbrotStateEngineSimple>(iterations,render_x,render_y,render_width,render_height);
 }
 
