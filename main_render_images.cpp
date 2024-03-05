@@ -28,23 +28,26 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "Mandelbrot.h"
+#include "Mandelbrot_render.h"
+#include "MandelbrotStateEngineSimple.h"
+#include "MandelbrotStateEngineEdgeFollow.h"
 
 int main() {
-	Mandelbrot m1(TESTA_CX,TESTA_CY,TEST_ZOOM,WIDTH,HEIGHT);
-	m1.fastest(ITERATIONS);
-	m1.save_to_png("test_black_detail.png",ITERATIONS);
-	Mandelbrot m2(TESTB_CX,TESTB_CY,TEST_ZOOM,WIDTH,HEIGHT);
-	m2.fastest(ITERATIONS);
-	m2.save_to_png("test_noblack_detail.png",ITERATIONS);
-	Mandelbrot m3(TESTC_CX,TESTC_CY,TEST_ZOOM,WIDTH,HEIGHT);
-	m3.fastest(ITERATIONS);
-	m3.save_to_png("test_noblack_nodetail.png",ITERATIONS);
+	Mandelbrot m5(0,0,0.225,200,200);
+	m5.render_avx_sheeprace4_u_tinc_addint_fast_sr_by4<MandelbrotStateEngineEdgeFollow>(ITERATIONS);
+	m5.save_to_png("mandelbrota.png",ITERATIONS);
 	Mandelbrot m4(TESTD_CX,TESTD_CY,TEST_ZOOM,WIDTH,HEIGHT);
-	m4.fastest(ITERATIONS);
+	m4.render_avx_sheeprace4_u_tinc_addint_fast_sr_by4<MandelbrotStateEngineEdgeFollow>(ITERATIONS);
 	m4.save_to_png("blacka.png",ITERATIONS);
-	Mandelbrot m5(0,0,0.25,WIDTH,HEIGHT);
-	m5.fastest(ITERATIONS);
-	m5.save_to_png("mandelbrot.png",ITERATIONS);
+	Mandelbrot m1(TESTA_CX,TESTA_CY,TEST_ZOOM,WIDTH,HEIGHT);
+	m1.render_avx_sheeprace4_u_tinc_addint_fast_sr_by4<MandelbrotStateEngineEdgeFollow>(ITERATIONS);
+	m1.save_to_png("test_black_detaila.png",ITERATIONS);
+	Mandelbrot m2(TESTB_CX,TESTB_CY,TEST_ZOOM,WIDTH,HEIGHT);
+	m2.render_avx_sheeprace4_u_tinc_addint_fast_sr_by4<MandelbrotStateEngineEdgeFollow>(ITERATIONS);
+	m2.save_to_png("test_noblack_detaila.png",ITERATIONS);
+	Mandelbrot m3(TESTC_CX,TESTC_CY,TEST_ZOOM,WIDTH,HEIGHT);
+	m3.render_avx_sheeprace4_u_tinc_addint_fast_sr_by4<MandelbrotStateEngineEdgeFollow>(ITERATIONS);
+	m3.save_to_png("test_noblack_nodetaila.png",ITERATIONS);
 	return 0;
 
 }

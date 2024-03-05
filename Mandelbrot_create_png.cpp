@@ -24,6 +24,8 @@
 #include <cstdlib>
 #include "Mandelbrot.h"
 
+const uint32_t MAX = 0xFFFFFFFFU;
+
 typedef struct {
     double h;       // angle in degrees
     double s;       // a fraction between 0 and 1
@@ -143,7 +145,7 @@ void Mandelbrot::save_to_png(const char* name, uint32_t iterations) {
 			uint32_t val=p[i*width+j];
 			if(val==iterations) {
 				rp[j]=0;
-			} else if(val==0) {
+			} else if(val==0 || val==MAX) {
 				rp[j]=1;
 			} else {
 				rp[j]=(val%0xFE)+2;

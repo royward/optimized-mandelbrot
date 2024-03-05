@@ -42,7 +42,7 @@ public:
 		ys = pys - prender_y * inc;
 		w = 0;
 		h = 0;
-		tail = 11;
+		tail = 15;
 	};
 	bool get_next_point(double& px, double& py, uint32_t&x, uint32_t& y) {
 		if(h == height) {

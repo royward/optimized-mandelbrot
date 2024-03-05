@@ -31,6 +31,12 @@
 
 #include <cstdint>
 
+#ifdef BROADWELL_OR_EARLIER
+#define AVX_CMP_GT_4_64(X,Y) _mm256_cmp_pd((X),(Y),_CMP_GT_OS)
+#else
+#define AVX_CMP_GT_4_64(X,Y) _mm256_cmpgt_epi64((X),(Y))
+#endif
+
 typedef uint32_t iterations_t;
 
 const static uint32_t WIDTH=1000;
@@ -67,11 +73,62 @@ public:
 	template<class M> void render_avx2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
 	template<class M> void render_avx3(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
 	template<class M> void render_avx_sheeprace1(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
-	template<class M> void render_avx_sheeprace2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
 	template<class M> void render_avx_sheeprace3(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_u(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_expect(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_tinc(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_u_tinc(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_tinc_addint(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_u_tinc_addint(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_u_tinc_addint_fast(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_u_tinc_addint_fast2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_u_tinc_addint_fast_sr(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_u_tinc_addint_fast_sr2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_u_tinc_addint_fast_sr_by2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_u_tinc_addint_fast_sr_by3(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_u_tinc_addint_fast_sr_by4(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace3_u_tinc_addint_fast_sr_by4(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace4_u_tinc_addint_fast_sr_by4(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace4_u_tinc_addint_fast_sr_by4_macro(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace4_tinc_addint_fast_sr_by4(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace4_tinc_addint_fast_sr_by4_macro(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace4_u_tinc_addint_fast_sr_by4_noadjust(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace4_u_tinc_addint_fast_sr_by4_noadjust_macro(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace1(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace3(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_u(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_expect(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_u_icmp(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_icmp(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_tinc(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_tinc_addint(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_u_tinc(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_u_tinc_addint(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_u_tinc_addint_fast(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_u_tinc_addint_fast2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_u_tinc_addint_fast_sr(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_u_tinc_addint_fast_sr2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_u_tinc_addint_fast_sr_by2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_u_tinc_addint_fast_sr_by3(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace2_u_tinc_addint_fast_sr_by4(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace3_u_tinc_addint_fast_sr_by4(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace4_u_tinc_addint_fast_sr_by4(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace4_tinc_addint_fast_sr_by4_macro(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace4_tinc_addint_fast_sr_by4(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace4_u_tinc_addint_fast_sr_by4_macro(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace4_u_tinc_addint_fast_sr_by4_noadjust(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace4_u_tinc_addint_fast_sr_by4_noadjust_macro(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void nt_render_avx_sheeprace5_u_tinc_addint_fast_sr_by4(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace5_u_tinc_addint_fast_sr_by4(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_icmp(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_u_icmp(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	template<class M> void render_avx_sheeprace2_icmp2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void fastestx(iterations_t iterations, uint32_t render_x=0, uint32_t render_y=0, uint32_t render_width=0, uint32_t render_height=0);
 	void fastest(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
-	bool get_next_point(double& pw, double& ph, uint32_t * & dest);
 	void reset(iterations_t* pp, uint32_t stride, uint32_t render_width, uint32_t render_height);
+	void render_multithreaded(uint32_t iterations, uint32_t thread_count, uint32_t divx, uint32_t divy = 0);
 	template<class M> void cleanup(M mse) {
 		mse.cleanup();
 	};

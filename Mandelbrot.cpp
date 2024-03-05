@@ -29,6 +29,10 @@
 
 #include "Mandelbrot.h"
 #include <cstring>
+#include <thread>
+#include <mutex>
+#include <vector>
+#include "MandelbrotStateEngineEdgeFollow.h"
 
 Mandelbrot::Mandelbrot(double cx, double cy, double zoom, uint32_t pwidth, uint32_t pheight) {
 	width=pwidth;
@@ -47,4 +51,47 @@ void Mandelbrot::reset(iterations_t* pp, uint32_t stride, uint32_t render_width,
 
 Mandelbrot::~Mandelbrot() {
 	delete[] p;
+}
+
+struct DisplayParams {
+	uint32_t x,y,width,height;
+};
+
+void task(Mandelbrot* m, std::mutex* lock, std::vector<DisplayParams>* job_list, uint32_t iterations) {
+	while(true) {
+		lock->lock();
+		if(job_list->empty()) {
+			lock->unlock();
+			return;
+		}
+		DisplayParams dp=job_list->back();
+		job_list->pop_back();
+		lock->unlock();
+		m->render_avx_sheeprace4_u_tinc_addint_fast_sr_by4<MandelbrotStateEngineEdgeFollow>(iterations,dp.x,dp.y,dp.width,dp.height);
+	}
+}
+
+void Mandelbrot::render_multithreaded(uint32_t iterations, uint32_t thread_count, uint32_t divx, uint32_t divy) {
+	std::vector<DisplayParams> job_list;
+	std::unique_ptr<std::thread[]> threads = std::make_unique<std::thread[]>(thread_count);
+	std::mutex lock;
+	if(divy==0) {
+		divy=divx;
+	}
+	for(uint32_t j=0;j<divy;j++) {
+		for(uint32_t i=0;i<divx;i++) {
+			DisplayParams dp;
+			dp.x=(width*i)/divx;
+			dp.y=(height*j)/divy;
+			dp.width=(width*(i+1))/divx-(width*i)/divx;
+			dp.height=(height*(j+1))/divy-(height*j)/divy;
+			job_list.push_back(dp);
+		}
+	}
+	for(uint32_t i=0;i<thread_count;i++) {
+		threads[i]=std::thread(&task,this,&lock,&job_list,iterations);
+	}
+	for(uint32_t i=0;i<thread_count;i++) {
+		threads[i].join();
+	}
 }

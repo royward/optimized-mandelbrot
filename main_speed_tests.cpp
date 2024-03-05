@@ -86,14 +86,14 @@ void do_test(std::string name, uint32_t count, double cx, double cy) {
 
 void speed_test() {
 	if(true) {
-		uint32_t COUNT=20;
-		do_test("A",COUNT,TESTA_CX,TESTA_CY);
+		uint32_t COUNT=2;
+// 		//do_test("A",COUNT,TESTA_CX,TESTA_CY);
 		do_test_fast_math("A",COUNT,TESTA_CX,TESTA_CY);
-		do_test("B",COUNT,TESTB_CX,TESTB_CY);
+// 		//do_test("B",COUNT,TESTB_CX,TESTB_CY);
 		do_test_fast_math("B",COUNT,TESTB_CX,TESTB_CY);
-		do_test("C",COUNT,TESTC_CX,TESTC_CY);
+// 		//do_test("C",COUNT,TESTC_CX,TESTC_CY);
 		do_test_fast_math("C",COUNT,TESTC_CX,TESTC_CY);
-		do_test("D",COUNT,TESTD_CX,TESTD_CY);
+		//do_test("D",COUNT,TESTD_CX,TESTD_CY);
 		do_test_fast_math("D",COUNT,TESTD_CX,TESTD_CY);
 	}
 	std::cout << "Speed tests done" << std::endl;
