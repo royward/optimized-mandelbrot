@@ -1,6 +1,6 @@
 CXX:=clang++-13
 # List my sources
-COMMON_SOURCES := Mandelbrot_functions_fast.cpp Mandelbrot.cpp Mandelbrot_fastest2.cpp
+COMMON_SOURCES := Mandelbrot_functions_fast.cpp Mandelbrot.cpp Mandelbrot_fastest.cpp
 # Mandelbrot_fastest2a.cpp 
 SPEED_TEST_SOURCES := main_speed_tests.cpp Mandelbrot_point_simple.cpp speed_tests_fast.cpp
 RENDER_SOURCES := main_render_images.cpp Mandelbrot_create_png.cpp
