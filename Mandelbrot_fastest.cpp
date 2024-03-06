@@ -29,81 +29,17 @@
 
 #include <immintrin.h>
 #include "Mandelbrot.h"
-// #include "Mandelbrot_render.h"
-// #include "MandelbrotStateEngineSimple.h"
-// 
-// void Mandelbrot::fastest(iterations_t iterations, uint32_t render_x, uint32_t render_y, uint32_t render_width, uint32_t render_height) {
-// 	render_avx_sheeprace2<MandelbrotStateEngineSimple>(iterations,render_x,render_y,render_width,render_height);
-// }
+#include "Mandelbrot_render.h"
+#include "MandelbrotStateEngineSimple.h"
 
-class MandelbrotStateEngineSimple2 {
-public:
-	MandelbrotStateEngineSimple2(iterations_t* pp, uint32_t pfullwidth, int32_t pfullheight, uint32_t prender_x, uint32_t prender_y, uint32_t pwidth, uint32_t pheight, double pxs, double pys, double pinc, uint32_t) {
-		fullwidth = pfullwidth;
-		p = pp + prender_x + fullwidth * prender_y;
-		width = pwidth;
-		height = pheight;
-		dummy_offset = (pfullheight - prender_y - height) * fullwidth - prender_x;
-		inc = pinc;
-		xs = pxs + prender_x * inc;
-		ys = pys - prender_y * inc;
-		w = 0;
-		h = 0;
-		tail = 15;
-	};
-	bool get_next_point(double& px, double& py, uint32_t&x, uint32_t& y);
-	void cleanup() {};
-public:
-	iterations_t* p;
-	uint32_t stored_iterations;
-	uint32_t stored_width;
-	uint32_t dx[3][4] = {}, dy[3][4] = {};
-private:
-	int32_t fullwidth;
-	uint32_t width;
-	uint32_t height;
-	int32_t dummy_offset;
-	uint32_t w;
-	uint32_t h;
-	double xs;
-	double ys;
-	double inc;
-	uint32_t tail;
-};
-
-//  __attribute__((noinline)) 
-bool MandelbrotStateEngineSimple2::get_next_point(double& px, double& py, uint32_t&x, uint32_t& y) {
-	if(h == height) {
-		if(tail == 0) {
-			return false;
-		}
-		tail--;
-		px = py = 0;
-		// dummy point
-		x = 0;
-		y = height;
-		return true;
-	}
-	x = w;
-	y = h;
-	px = xs + w * inc;
-	py = ys - h * inc;
-	w++;
-	if(w >= width) {
-		w = 0;
-		h++;
-	};
-	return true;
-}
-
-void Mandelbrot::fastest(iterations_t iterations, uint32_t render_x, uint32_t render_y, uint32_t render_width, uint32_t render_height) {
+void Mandelbrot::fastest_old(iterations_t iterations, uint32_t render_x, uint32_t render_y, uint32_t render_width, uint32_t render_height) {
 	if(render_width == 0) {
 		render_width = width - render_x;
 	}
 	if(render_height == 0) {
 		render_height = height - render_y;
 	}
-	MandelbrotStateEngineSimple2 mse(p, width, height, render_x, render_y, render_width, render_height, xs, ys, inc, iterations);
+	MandelbrotStateEngineSimple mse(p, width, height, render_x, render_y, render_width, render_height, xs, ys, inc, iterations);
 	iterations_t* pp = mse.p;
 	reset(pp, width, render_width, render_height);
 	iterations--;

@@ -33,21 +33,20 @@
 #include "MandelbrotStateEngineEdgeFollow.h"
 
 int main() {
-	Mandelbrot m5(0,0,0.225,200,200);
+	Mandelbrot m5(0,0,0.25,WIDTH,HEIGHT);
 	m5.render_avx_i4_u_tinc_addint_fast_by4<MandelbrotStateEngineEdgeFollow>(ITERATIONS);
-	m5.save_to_png("mandelbrota.png",ITERATIONS);
-	Mandelbrot m4(TESTD_CX,TESTD_CY,TEST_ZOOM,WIDTH,HEIGHT);
-	m4.render_avx_i4_u_tinc_addint_fast_by4<MandelbrotStateEngineEdgeFollow>(ITERATIONS);
-	m4.save_to_png("blacka.png",ITERATIONS);
+	m5.save_to_png("mandelbrot.png",ITERATIONS);
 	Mandelbrot m1(TESTA_CX,TESTA_CY,TEST_ZOOM,WIDTH,HEIGHT);
 	m1.render_avx_i4_u_tinc_addint_fast_by4<MandelbrotStateEngineEdgeFollow>(ITERATIONS);
-	m1.save_to_png("test_black_detaila.png",ITERATIONS);
+	m1.save_to_png("mandelbrot_test_A.png",ITERATIONS);
 	Mandelbrot m2(TESTB_CX,TESTB_CY,TEST_ZOOM,WIDTH,HEIGHT);
 	m2.render_avx_i4_u_tinc_addint_fast_by4<MandelbrotStateEngineEdgeFollow>(ITERATIONS);
-	m2.save_to_png("test_noblack_detaila.png",ITERATIONS);
+	m2.save_to_png("mandelbrot_test_B.png",ITERATIONS);
 	Mandelbrot m3(TESTC_CX,TESTC_CY,TEST_ZOOM,WIDTH,HEIGHT);
 	m3.render_avx_i4_u_tinc_addint_fast_by4<MandelbrotStateEngineEdgeFollow>(ITERATIONS);
-	m3.save_to_png("test_noblack_nodetaila.png",ITERATIONS);
+	m3.save_to_png("mandelbrot_test_C.png",ITERATIONS);
+	Mandelbrot m4(TESTD_CX,TESTD_CY,TEST_ZOOM,WIDTH,HEIGHT);
+	m4.render_avx_i4_u_tinc_addint_fast_by4<MandelbrotStateEngineEdgeFollow>(ITERATIONS);
+	m4.save_to_png("mandelbrot_test_D.png",ITERATIONS);
 	return 0;
-
 }

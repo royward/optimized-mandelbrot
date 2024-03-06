@@ -31,22 +31,12 @@
 
 #include <cstdint>
 #include <vector>
-#include <iostream>
 
 //#define EDGE_FOLLOW_QUEUE 1
-
-static uint64_t time_elapsed_nsx() {
-	struct timespec ts;
-	clock_gettime(CLOCK_MONOTONIC,&ts);
-	uint64_t ret=ts.tv_sec;
-	return ret*1000000000ULL+ts.tv_nsec;
-}
-
 
 const iterations_t MAX = std::numeric_limits<iterations_t>::max();
 
 template <typename T> void fill(T* p, uint32_t stride, uint32_t width, uint32_t height) {
-	uint64_t t = time_elapsed_nsx();
 	for(uint32_t j = 1;j<height - 1;j++) {
 		T* py = &p[stride * j];
 		T val = py[0];
@@ -58,7 +48,6 @@ template <typename T> void fill(T* p, uint32_t stride, uint32_t width, uint32_t 
 			}
 		}
 	}
-	std::cout  << "fill" << " s=" << (time_elapsed_nsx()-t)*0.000000001 << std::endl;
 }
 
 inline void setup_point(double xs, double ys, double inc, double& px, double& py, uint32_t& x, uint32_t& y, uint32_t w, uint32_t h) {
