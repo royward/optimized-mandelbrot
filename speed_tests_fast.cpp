@@ -344,19 +344,6 @@ void do_test_fast_math(std::string name, uint32_t count, double cx, double cy) {
 	std::cout << name << ' '  << "render_avx_sheeprace4_u_tinc_addint_fast_sr_by4" << " s=" << (time_elapsed_ns()-time0)*0.000000001 << std::endl;
 
 
-	time0=time_elapsed_ns();
-	for(uint32_t i=0;i<count;i++)m.render_multithreaded(ITERATIONS,1,4);
-	std::cout << name << ' '  << "thread1" << " s=" << (time_elapsed_ns()-time0)*0.000000001 << std::endl;
-	time0=time_elapsed_ns();
-	for(uint32_t i=0;i<count;i++)m.render_multithreaded(ITERATIONS,2,4);
-	std::cout << name << ' '  << "thread2" << " s=" << (time_elapsed_ns()-time0)*0.000000001 << std::endl;
-	time0=time_elapsed_ns();
-	for(uint32_t i=0;i<count;i++)m.render_multithreaded(ITERATIONS,3,4);
-	std::cout << name << ' '  << "thread3" << " s=" << (time_elapsed_ns()-time0)*0.000000001 << std::endl;
-	time0=time_elapsed_ns();
-	for(uint32_t i=0;i<count;i++)m.render_multithreaded(ITERATIONS,4,4);
-	std::cout << name << ' '  << "thread3" << " s=" << (time_elapsed_ns()-time0)*0.000000001 << std::endl;
-
 	// 	time0=time_elapsed_ns();
 // 	for(uint32_t i=0;i<count;i++)m.nt_render_avx_sheeprace4_u_tinc_addint_fast_sr_by4_macro(ITERATIONS);
 // 	std::cout << name << ' '  << "render_avx_sheeprace4_u_tinc_addint_fast_sr_by4_macro" << " s=" << (time_elapsed_ns()-time0)*0.000000001 << std::endl;
@@ -385,6 +372,18 @@ void do_test_fast_math(std::string name, uint32_t count, double cx, double cy) {
 // 	time0=time_elapsed_ns();
 // 	for(uint32_t i=0;i<count;i++)m.fastestx(ITERATIONS);
 // 	std::cout << name << ' ' << "fastestx1" << " s=" << (time_elapsed_ns()-time0)*0.000000001 << std::endl;
+	time0=time_elapsed_ns();
+	for(uint32_t i=0;i<count;i++)m.render_multithreaded(ITERATIONS,1,4);
+	std::cout << name << ' '  << "thread1" << " s=" << (time_elapsed_ns()-time0)*0.000000001 << std::endl;
+	time0=time_elapsed_ns();
+	for(uint32_t i=0;i<count;i++)m.render_multithreaded(ITERATIONS,2,4);
+	std::cout << name << ' '  << "thread2" << " s=" << (time_elapsed_ns()-time0)*0.000000001 << std::endl;
+	time0=time_elapsed_ns();
+	for(uint32_t i=0;i<count;i++)m.render_multithreaded(ITERATIONS,3,4);
+	std::cout << name << ' '  << "thread3" << " s=" << (time_elapsed_ns()-time0)*0.000000001 << std::endl;
+	time0=time_elapsed_ns();
+	for(uint32_t i=0;i<count;i++)m.render_multithreaded(ITERATIONS,4,4);
+	std::cout << name << ' '  << "thread3" << " s=" << (time_elapsed_ns()-time0)*0.000000001 << std::endl;
 }
 
 // 	template<class M> void render_avx_sheeprace2_u(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);

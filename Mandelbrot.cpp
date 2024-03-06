@@ -67,7 +67,7 @@ void task(Mandelbrot* m, std::mutex* lock, std::vector<DisplayParams>* job_list,
 		DisplayParams dp=job_list->back();
 		job_list->pop_back();
 		lock->unlock();
-		m->render_avx_sheeprace4_u_tinc_addint_fast_sr_by4<MandelbrotStateEngineEdgeFollow>(iterations,dp.x,dp.y,dp.width,dp.height);
+		m->render_avx_i4_u_tinc_addint_fast_by4<MandelbrotStateEngineEdgeFollow>(iterations,dp.x,dp.y,dp.width,dp.height);
 	}
 }
 
