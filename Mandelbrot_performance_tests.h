@@ -27,6 +27,8 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+// ***NOTE*** These are various mixed timing tests. Some of them are broken. Use at your own risk.
+
 #pragma once
 
 #include <immintrin.h>

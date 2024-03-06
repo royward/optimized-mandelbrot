@@ -31,7 +31,6 @@
 #include <string>
 #include <iostream>
 #include "Mandelbrot.h"
-#include "Mandelbrot_render.h"
 #include "MandelbrotStateEngineSimple.h"
 
 uint32_t mandelbrot_point_fast_math(double cx, double cy, uint32_t m) {

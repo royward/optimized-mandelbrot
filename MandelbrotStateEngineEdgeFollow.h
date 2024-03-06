@@ -86,10 +86,6 @@ public:
 		p[x + y * fullwidth] = MAX;
 	}
 	bool get_next_point(double& px, double& py, uint32_t&x, uint32_t& y) {
-// 		point_count++;
-// 		if(point_count>200000) {
-// 			 return 0;
-// 		}
 		if(!boundaries_done) {
 			if(wtop<width) {
 				setup_point(xs,ys,inc,px,py,x,y,wtop,0);

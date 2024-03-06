@@ -47,42 +47,10 @@ $(RELEASE_OBJ_DIR)/%.o: %.cpp
 	@echo " C++ : " $< " => " $@
 	@$(CXX) -c $< $(RELEASE_CXXFLAGS) -o $@
 
-# # Fast math for this one
+# # Template for fast math
 # $(RELEASE_OBJ_DIR)/Mandelbrot_functions_fast.o: Mandelbrot_functions_fast.cpp
 # 	@# Build the dependency file
 # 	@$(CXX) -MM -MP -MT $(df_speed_tests).o -MT $(df_speed_tests).d $(RELEASE_CXXFLAGS) $< > $(df_speed_tests).d
 # 	@# Compile the object file
 # 	@echo " C++(fast) : " $< " => " $@
 # 	@$(CXX) -c Mandelbrot_functions_fast.cpp $(RELEASE_CXXFLAGS) -ffast-math -o $(RELEASE_OBJ_DIR)/Mandelbrot_functions_fast.o
-# 
-# # Fast math for this one
-# $(RELEASE_OBJ_DIR)/speed_tests_fast.o: speed_tests_fast.cpp
-# 	@# Build the dependency file
-# 	@$(CXX) -MM -MP -MT $(df_speed_tests).o -MT $(df_speed_tests).d $(RELEASE_CXXFLAGS) $< > $(df_speed_tests).d
-# 	@# Compile the object file
-# 	@echo " C++(fast) : " $< " => " $@
-# 	@$(CXX) -c speed_tests_fast.cpp $(RELEASE_CXXFLAGS) -ffast-math -o $(RELEASE_OBJ_DIR)/speed_tests_fast.o
-# 
-# # Fast math for this one
-# $(RELEASE_OBJ_DIR)/Mandelbrot_fastest.o: Mandelbrot_fastest.cpp
-# 	@# Build the dependency file
-# 	@$(CXX) -MM -MP -MT $(df_speed_tests).o -MT $(df_speed_tests).d $(RELEASE_CXXFLAGS) $< > $(df_speed_tests).d
-# 	@# Compile the object file
-# 	@echo " C++(fast) : " $< " => " $@
-# 	@$(CXX) -c Mandelbrot_fastest.cpp $(RELEASE_CXXFLAGS) -ffast-math -o $(RELEASE_OBJ_DIR)/Mandelbrot_fastest.o
-# 
-# # Fast math for this one
-# $(RELEASE_OBJ_DIR)/Mandelbrot_fastest2.o: Mandelbrot_fastest2.cpp
-# 	@# Build the dependency file
-# 	@$(CXX) -MM -MP -MT $(df_speed_tests).o -MT $(df_speed_tests).d $(RELEASE_CXXFLAGS) $< > $(df_speed_tests).d
-# 	@# Compile the object file
-# 	@echo " C++(fast) : " $< " => " $@
-# 	@$(CXX) -c Mandelbrot_fastest2.cpp $(RELEASE_CXXFLAGS) -ffast-math -o $(RELEASE_OBJ_DIR)/Mandelbrot_fastest2.o
-# 
-# # Fast math for this one
-# $(RELEASE_OBJ_DIR)/Mandelbrot_fastest2a.o: Mandelbrot_fastest2a.cpp
-# 	@# Build the dependency file
-# 	@$(CXX) -MM -MP -MT $(df_speed_tests).o -MT $(df_speed_tests).d $(RELEASE_CXXFLAGS) $< > $(df_speed_tests).d
-# 	@# Compile the object file
-# 	@echo " C++(fast) : " $< " => " $@
-# 	@$(CXX) -c Mandelbrot_fastest2a.cpp $(RELEASE_CXXFLAGS) -ffast-math -o $(RELEASE_OBJ_DIR)/Mandelbrot_fastest2a.o

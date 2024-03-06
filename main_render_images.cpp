@@ -28,9 +28,6 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "Mandelbrot.h"
-#include "Mandelbrot_render.h"
-#include "MandelbrotStateEngineSimple.h"
-#include "MandelbrotStateEngineEdgeFollow.h"
 
 int main() {
 // 	Mandelbrot m5(0,0,0.25,WIDTH,HEIGHT);

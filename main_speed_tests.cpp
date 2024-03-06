@@ -33,7 +33,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "Mandelbrot_render_simple.h"
-#include "Mandelbrot_render.h"
+#include "Mandelbrot_performance_tests.h"
 #include "MandelbrotStateEngineEdgeFollow.h"
 
 uint64_t time_elapsed_ns() {

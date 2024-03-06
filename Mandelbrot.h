@@ -59,8 +59,20 @@ const static double TESTD_CY=0;
 
 class Mandelbrot {
 public:
+// Utility methods
 	Mandelbrot(double pcx, double pcy, double pzoom, uint32_t pwidth, uint32_t pheight);
 	~Mandelbrot();
+	void reset(iterations_t* pp, uint32_t stride, uint32_t render_width, uint32_t render_height);
+	template<class M> void cleanup(M mse) {
+		mse.cleanup();
+	};
+	void save_to_png(const char* name, uint32_t iterations);
+// Calculating at different levels of optimization
+	void fastest_old(iterations_t iterations, uint32_t render_x=0, uint32_t render_y=0, uint32_t render_width=0, uint32_t render_height=0);
+	void fastest_raw(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void fastest_contour(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void render_multithreaded(uint32_t iterations, uint32_t thread_count, uint32_t divx, uint32_t divy = 0);
+// Experimental stuff from when I was profiling performace. Use at your own risk.
 	template<class M> void render1(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
 	template<class M> void render2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
 	template<class M> void render3(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
@@ -121,15 +133,7 @@ public:
 	template<class M> void render_avx_sheeprace2_icmp(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
 	template<class M> void render_avx_sheeprace2_u_icmp(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
 	template<class M> void render_avx_sheeprace2_icmp2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
-	void fastest_old(iterations_t iterations, uint32_t render_x=0, uint32_t render_y=0, uint32_t render_width=0, uint32_t render_height=0);
-	void fastest_raw(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
-	void fastest_contour(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
-	void reset(iterations_t* pp, uint32_t stride, uint32_t render_width, uint32_t render_height);
-	void render_multithreaded(uint32_t iterations, uint32_t thread_count, uint32_t divx, uint32_t divy = 0);
-	template<class M> void cleanup(M mse) {
-		mse.cleanup();
-	};
-	void save_to_png(const char* name, uint32_t iterations);
+
 	iterations_t* p;
 private:
 	uint32_t width;
