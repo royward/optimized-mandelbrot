@@ -29,7 +29,6 @@
 
 #include <immintrin.h>
 #include "Mandelbrot.h"
-#include "Mandelbrot_render.h"
 #include "MandelbrotStateEngineSimple.h"
 
 void Mandelbrot::fastest_old(iterations_t iterations, uint32_t render_x, uint32_t render_y, uint32_t render_width, uint32_t render_height) {
