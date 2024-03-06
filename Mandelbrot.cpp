@@ -37,7 +37,7 @@
 Mandelbrot::Mandelbrot(double cx, double cy, double zoom, uint32_t pwidth, uint32_t pheight) {
 	width=pwidth;
 	height=pheight;
-	p=new iterations_t[width*height+1]();
+	p=new iterations_t[width*(height+1)]();
 	xs=cx-0.5/zoom;
 	ys=cy+0.5*height/(zoom*width);
 	inc=1.0/(zoom*width);
@@ -67,7 +67,7 @@ void task(Mandelbrot* m, std::mutex* lock, std::vector<DisplayParams>* job_list,
 		DisplayParams dp=job_list->back();
 		job_list->pop_back();
 		lock->unlock();
-		m->render_avx_i4_u_tinc_addint_fast_by4<MandelbrotStateEngineEdgeFollow>(iterations,dp.x,dp.y,dp.width,dp.height);
+		m->fastest_contour(iterations,dp.x,dp.y,dp.width,dp.height);
 	}
 }
 

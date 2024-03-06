@@ -121,8 +121,9 @@ public:
 	template<class M> void render_avx_sheeprace2_icmp(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
 	template<class M> void render_avx_sheeprace2_u_icmp(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
 	template<class M> void render_avx_sheeprace2_icmp2(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
-	void fastestx(iterations_t iterations, uint32_t render_x=0, uint32_t render_y=0, uint32_t render_width=0, uint32_t render_height=0);
-	void fastest(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void fastest_old(iterations_t iterations, uint32_t render_x=0, uint32_t render_y=0, uint32_t render_width=0, uint32_t render_height=0);
+	void fastest_raw(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
+	void fastest_contour(iterations_t iterations, uint32_t render_x = 0, uint32_t render_y = 0, uint32_t render_width = 0, uint32_t render_height = 0);
 	void reset(iterations_t* pp, uint32_t stride, uint32_t render_width, uint32_t render_height);
 	void render_multithreaded(uint32_t iterations, uint32_t thread_count, uint32_t divx, uint32_t divy = 0);
 	template<class M> void cleanup(M mse) {
